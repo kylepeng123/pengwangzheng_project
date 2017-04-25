@@ -5,8 +5,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class Examples{
+	
+	static int solutionsNum = 1;
 
     static void runCoverExample(){
         int[][] example = { { 0, 0, 1, 0, 1, 1, 0 }, 
@@ -35,9 +38,16 @@ public class Examples{
     }
     
     
-    private static void runExample(){
+    public static void runExample(){
         
-        String[] diffs = {"simple.txt","easy.txt","intermediate.txt","expert.txt"};
+    	Scanner Sreader = new Scanner(System.in);  // Reading from System.in
+    	System.out.println("Enter a level(easy, intermediate, hard): ");
+    	String s = Sreader.nextLine();
+    	String[] diffs = {s+".txt"};
+     //   String[] diffs = {
+        		/**"simple.txt","easy.txt","intermediate.txt","expert.txt",**/
+     //   		  "evil.txt"};
+        		 
         
         
         BufferedReader reader = null;
@@ -53,19 +63,22 @@ public class Examples{
                 reader = new BufferedReader(new FileReader(filename));
                 
                 while ((text = reader.readLine()) != null) {
-                    
                     int[][] sudoku = fromString(text);
                     
                     // change below to whichever one you want to try out
                     SudokuDLX solver = new SudokuDLX();
-//                    NaiveSudokuSolver solver = new NaiveSudokuSolver();
+     //               NaiveSudokuSolver solver = new NaiveSudokuSolver();
                     
                     long milis = System.nanoTime();
-                    
+ 
                     solver.solve(sudoku);
+                    solutionsNum++;
                     
                     long elapsed = System.nanoTime() - milis;
                     
+                    double duration = TimeUnit.NANOSECONDS.toMillis(elapsed);
+                    System.out.println("#The running time is "+ elapsed +" nanoseconds.");
+                    System.out.println("#The running time is "+ duration +" milliseconds.");
                     timings.add(elapsed);
                     
                 }    
@@ -126,18 +139,20 @@ public class Examples{
         }; // apparently the hardest sudoku
         
 //        
-//        SudokuDLX sudoku = new SudokuDLX();
-//        sudoku.solve(hardest);
+        SudokuDLX sudoku = new SudokuDLX();
+        sudoku.solve(hardest);
         
-        NaiveSudokuSolver naive = new NaiveSudokuSolver();
-        naive.solve(hardest);
+      //  NaiveSudokuSolver naive = new NaiveSudokuSolver();
+      //  naive.solve(hardest);
     }
 
     public static void main(String[] args){
+    	
+    	
 //        runCoverExample();
-//        runSudokuExample();
+   //     runSudokuExample();
         
-        runExample();    
-    }
+        runExample();   
+            }
 
 }

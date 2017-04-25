@@ -9,6 +9,7 @@ import java.util.*;
 public class DancingLinks{
     
     static final boolean verbose = true;
+    long startTime;
 
     class DancingNode{
         DancingNode L, R, U, D;
@@ -110,13 +111,13 @@ public class DancingLinks{
         if (header.R == header){ // all the columns removed
             if(verbose){
                 System.out.println("-----------------------------------------");
-                System.out.println("Solution #" + solutions + "\n");
+                System.out.println("Solution #" + Examples.solutionsNum+ "\n");
             }
             handler.handleSolution(answer);
             if(verbose){
                 System.out.println("-----------------------------------------");
             }
-            solutions++;
+            
         } else{
             ColumnNode c = selectColumnNodeHeuristic();
             c.cover();
@@ -232,6 +233,10 @@ public class DancingLinks{
     
     private void showInfo(){
         System.out.println("Number of updates: " + updates);
+      //  long endTime   = System.currentTimeMillis();
+      // long totalTime = endTime - startTime;
+    //	System.out.println("The running time is "+ totalTime +"ms.");
+
     }
 
     // Grid consists solely of 1s and 0s. Undefined behaviour otherwise
@@ -245,11 +250,13 @@ public class DancingLinks{
     }
 
     public void runSolver(){
-        solutions = 0;
+    	//startTime = System.currentTimeMillis();
+        //solutions = 0;
         updates = 0;
         answer = new LinkedList<DancingNode>();
         search(0);
         if(verbose) showInfo();
+    	
     }
 
 }
