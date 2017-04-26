@@ -41,13 +41,9 @@ public class Examples{
     public static void runExample(){
         
     	Scanner Sreader = new Scanner(System.in);  // Reading from System.in
-    	System.out.println("Enter a level(easy, intermediate, hard): ");
+    	System.out.println("Enter a level(easy, intermediate, hard, 17-clue): ");
     	String s = Sreader.nextLine();
-    	String[] diffs = {s+".txt"};
-     //   String[] diffs = {
-        		/**"simple.txt","easy.txt","intermediate.txt","expert.txt",**/
-     //   		  "evil.txt"};
-        		 
+    	String[] diffs = {s+".txt"};		 
         
         
         BufferedReader reader = null;
